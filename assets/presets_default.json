@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Study",
+    "emoji": "📚",
+    "config": {
+      "details": "Studying hard",
+      "state": "Do not disturb",
+      "largeImageKey": "",
+      "largeImageText": "Study Time",
+      "smallImageKey": "",
+      "smallImageText": "",
+      "musicMode": false,
+      "buttons": []
+    }
+  },
+  {
+    "name": "Work",
+    "emoji": "💻",
+    "config": {
+      "details": "Working",
+      "state": "In the zone",
+      "largeImageKey": "",
+      "largeImageText": "Productive Mode",
+      "smallImageKey": "",
+      "smallImageText": "",
+      "musicMode": false,
+      "buttons": []
+    }
+  },
+  {
+    "name": "Gaming",
+    "emoji": "🎮",
+    "config": {
+      "details": "Gaming",
+      "state": "Having fun",
+      "largeImageKey": "",
+      "largeImageText": "Game On",
+      "smallImageKey": "",
+      "smallImageText": "",
+      "musicMode": false,
+      "buttons": []
+    }
+  },
+  {
+    "name": "Coding",
+    "emoji": "☕",
+    "config": {
+      "details": "Writing code",
+      "state": "In the flow",
+      "largeImageKey": "",
+      "largeImageText": "Code Mode",
+      "smallImageKey": "",
+      "smallImageText": "",
+      "musicMode": false,
+      "buttons": []
+    }
+  }
+]

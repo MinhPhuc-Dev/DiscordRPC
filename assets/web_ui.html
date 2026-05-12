@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Discord RPC Manager</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#0d0e14;--surface:#161822;--surface2:#1e2030;--border:#2a2d3e;--accent:#5865f2;--accent2:#7983f5;--text:#e8eaf0;--muted:#6b7280;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b}body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}header{padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0}header h1{font-size:16px;font-weight:700;background:linear-gradient(135deg,#5865f2,#7983f5);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.status-dot{width:8px;height:8px;border-radius:50%;background:var(--red);transition:.3s}.status-dot.on{background:var(--green);box-shadow:0 0 8px var(--green)}.conn-info{font-size:12px;color:var(--muted);margin-left:auto}#connBtn{margin-left:8px;padding:6px 14px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}#connBtn:hover{background:var(--accent2)}.main{display:flex;flex:1;overflow:hidden}.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}.sidebar-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:16px 16px 8px}.preset-btn{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;border:none;background:none;color:var(--text);width:100%;text-align:left;font-size:13px;border-radius:0;transition:.2s;position:relative}.preset-btn:hover{background:var(--surface2)}.preset-btn.active{background:rgba(88,101,242,.15);color:var(--accent2)}.preset-btn .emoji{font-size:18px;flex-shrink:0}.preset-btn .pname{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.preset-color{width:6px;height:28px;border-radius:3px;flex-shrink:0}.add-preset{margin:8px 12px;padding:8px;border-radius:8px;border:1px dashed var(--border);background:none;color:var(--muted);font-size:12px;cursor:pointer;transition:.2s}.add-preset:hover{color:var(--text);border-color:var(--accent)}.editor{flex:1;display:flex;flex-direction:column;overflow:hidden}.tabs{display:flex;padding:0 20px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}.tab{padding:12px 16px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}.tab.active{color:var(--accent2);border-bottom-color:var(--accent)}.content{flex:1;overflow-y:auto;padding:20px;display:none}.content.active{display:block}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.field{margin-bottom:14px}.field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:8px;font-size:13px;font-family:inherit;outline:none;transition:.2s}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(88,101,242,.15)}.field textarea{resize:vertical;min-height:60px}input[type=checkbox]{width:auto;cursor:pointer}.toggle-row{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:12px}.section-title{font-size:13px;font-weight:700;color:var(--text);margin:20px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}.img-search-row{display:flex;gap:8px;margin-bottom:10px}.img-search-row input{flex:1}.btn{padding:8px 16px;border-radius:8px;border:none;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent2)}.btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.btn-ghost:hover{border-color:var(--accent)}.btn-green{background:var(--green);color:#fff}.btn-red{background:var(--red);color:#fff}.grid-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:10px;max-height:220px;overflow-y:auto}.grid-img-item{border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.2s;position:relative;aspect-ratio:1}.grid-img-item:hover,.grid-img-item.sel{border-color:var(--accent)}.grid-img-item img{width:100%;height:100%;object-fit:cover}.music-results{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto;margin-top:10px}.music-item{display:flex;gap:10px;align-items:center;padding:8px;background:var(--surface2);border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.2s}.music-item:hover,.music-item.sel{border-color:var(--accent)}.music-thumb{width:44px;height:44px;border-radius:6px;object-fit:cover;flex-shrink:0}.music-info .mt{font-size:13px;font-weight:600}.music-info .ma{font-size:11px;color:var(--muted)}.preview-card{background:var(--surface2);border-radius:12px;padding:16px;display:flex;gap:14px}.preview-large-img{width:72px;height:72px;border-radius:8px;object-fit:cover;background:var(--surface);flex-shrink:0;position:relative}.preview-small-img{width:22px;height:22px;border-radius:50%;object-fit:cover;background:var(--border);position:absolute;bottom:-4px;right:-4px;border:2px solid var(--surface2)}.preview-info .pn{font-weight:700;font-size:14px;margin-bottom:4px}.preview-info .pd{font-size:13px;color:var(--muted);margin-bottom:2px}.preview-info .ps{font-size:12px;color:var(--muted)}.preview-btns{display:flex;gap:8px;margin-top:12px}.preview-btn-item{flex:1;padding:7px;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:12px;font-weight:600;text-align:center}.action-bar{display:flex;gap:8px;padding:12px 20px;background:var(--surface);border-top:1px solid var(--border);flex-shrink:0}.action-bar .btn{padding:9px 20px}.spacer{flex:1}.toast{position:fixed;bottom:20px;right:20px;background:#22c55e;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(10px);transition:.3s;pointer-events:none;z-index:999}.toast.show{opacity:1;transform:translateY(0)}.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle}@keyframes spin{to{transform:rotate(360deg)}}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}</style></head>
+<body><header><div class="status-dot" id="dot"></div><h1>🎮 Discord RPC Manager</h1><span class="conn-info" id="connInfo">Not connected</span><button id="connBtn" onclick="toggleConnect()">Connect</button></header><div class="main"><div class="sidebar"><div class="sidebar-label">Presets</div><div id="presetList"></div><button class="add-preset" onclick="addPreset()">+ New Preset</button></div><div class="editor"><div class="tabs"><div class="tab active" onclick="switchTab(this,'main')">⚡ Presence</div><div class="tab" onclick="switchTab(this,'images')">🖼 Images</div><div class="tab" onclick="switchTab(this,'buttons')">🔗 Buttons</div><div class="tab" onclick="switchTab(this,'music')">🎵 Music</div><div class="tab" onclick="switchTab(this,'preview')">👁 Preview</div></div><div class="content active" id="tab-main"><div class="field"><label>Preset Name</label><input id="pName" placeholder="My Preset" oninput="markDirty()"></div><div class="row"><div class="field"><label>Details (Line 1)</label><input id="fDetails" placeholder="Playing something..." oninput="markDirty()"></div><div class="field"><label>State (Line 2)</label><input id="fState" placeholder="Having fun" oninput="markDirty()"></div></div><div class="toggle-row"><input type="checkbox" id="fMusicMode" onchange="markDirty()"><label for="fMusicMode">Music Mode (auto-fill from Spotify/YT Music)</label></div><div class="toggle-row"><input type="checkbox" id="fJoinBtn" onchange="markDirty()"><label for="fJoinBtn">Use 'Ask to Join' instead of URL buttons</label></div><div class="section-title">Preset Color</div><div class="row"><div class="field"><label>Color R (0-1)</label><input type="range" id="cR" min="0" max="1" step="0.01" oninput="markDirty();updateColorPreview()"></div><div class="field"><label>Color G (0-1)</label><input type="range" id="cG" min="0" max="1" step="0.01" oninput="markDirty();updateColorPreview()"></div></div><div class="field"><label>Color B (0-1)</label><input type="range" id="cB" min="0" max="1" step="0.01" oninput="markDirty();updateColorPreview()"></div><div id="colorPreview" style="height:24px;border-radius:8px;margin-top:-4px;transition:.3s"></div></div><div class="content" id="tab-images"><div class="section-title">Large Image</div><div class="img-search-row"><input id="liSearch" placeholder="Search image or GIF..." onkeydown="if(event.key==='Enter')searchImg('large')"><button class="btn btn-primary" onclick="searchImg('large')">Search</button><button class="btn btn-ghost" onclick="searchGif('large')">GIF</button></div><div class="field"><label>Image URL or Asset Key</label><input id="fLargeImg" placeholder="https://... or asset_key" oninput="markDirty();updatePreview()"></div><div class="field"><label>Hover Text</label><input id="fLargeText" placeholder="Hover tooltip" oninput="markDirty()"></div><div class="grid-imgs" id="liResults"></div><div class="section-title">Small Image</div><div class="img-search-row"><input id="siSearch" placeholder="Search image or GIF..." onkeydown="if(event.key==='Enter')searchImg('small')"><button class="btn btn-primary" onclick="searchImg('small')">Search</button><button class="btn btn-ghost" onclick="searchGif('small')">GIF</button></div><div class="field"><label>Image URL or Asset Key</label><input id="fSmallImg" placeholder="https://... or asset_key" oninput="markDirty();updatePreview()"></div><div class="field"><label>Hover Text</label><input id="fSmallText" placeholder="Hover tooltip" oninput="markDirty()"></div><div class="grid-imgs" id="siResults"></div></div><div class="content" id="tab-buttons"><div class="section-title">Button 1</div><div class="row"><div class="field"><label>Label (max 32 chars)</label><input id="fB1L" placeholder="Visit Website" oninput="markDirty()" maxlength="32"></div><div class="field"><label>URL</label><input id="fB1U" placeholder="https://..." oninput="markDirty()"></div></div><div class="section-title">Button 2</div><div class="row"><div class="field"><label>Label (max 32 chars)</label><input id="fB2L" placeholder="YouTube Music" oninput="markDirty()" maxlength="32"></div><div class="field"><label>URL</label><input id="fB2U" placeholder="https://..." oninput="markDirty()"></div></div></div><div class="content" id="tab-music"><div class="section-title">Search Music (iTunes)</div><div class="img-search-row"><input id="musicSearch" placeholder="Song name, artist..." onkeydown="if(event.key==='Enter')searchMusic()"><button class="btn btn-primary" onclick="searchMusic()">Search</button></div><div class="music-results" id="musicResults"></div></div><div class="content" id="tab-preview"><div class="section-title">Live Discord Preview</div><div class="preview-card"><div class="preview-large-img"><img id="pvLarge" src="" style="width:100%;height:100%;border-radius:6px;object-fit:cover"><img id="pvSmall" class="preview-small-img" src=""></div><div class="preview-info"><div class="pn" id="pvName">Discord RPC Manager</div><div class="pd" id="pvDet">Details...</div><div class="ps" id="pvSt">State...</div></div></div><div class="preview-btns" id="pvBtns"></div><div class="section-title" style="margin-top:20px">Live Status</div><div id="liveStatus" style="font-size:12px;color:var(--muted);line-height:1.8"></div></div></div><div class="action-bar"><button class="btn btn-ghost" onclick="revertPreset()">↺ Revert</button><span class="spacer"></span><button class="btn btn-primary" onclick="applyNow()">⚡ Apply Now</button><button class="btn btn-green" onclick="savePreset()">💾 Save Preset</button></div></div></div><div class="toast" id="toast"></div>
+<script>
+let state={};let dirty=false;let selPreset=-1;
+
+async function api(path,method,body){
+  const opts={method:method||"GET",headers:{"Content-Type":"application/json"}};
+  if(body)opts.body=JSON.stringify(body);
+  const r=await fetch(path,opts);return r.json();
+}
+
+async function poll(){
+  try{
+    state=await api("/api/state");
+    const dot=document.getElementById("dot");
+    const ci=document.getElementById("connInfo");
+    const btn=document.getElementById("connBtn");
+    if(state.connected){
+      dot.className="status-dot on";
+      ci.textContent="Connected as "+state.username;
+      btn.textContent="Disconnect";btn.style.background="var(--red)";
+    }else{
+      dot.className="status-dot";ci.textContent="Not connected";
+      btn.textContent="Connect";btn.style.background="var(--accent)";
+    }
+    renderPresets();
+    updateLiveStatus();
+    updatePreview();
+  }catch(e){}
+}
+
+function renderPresets(){
+  const list=document.getElementById("presetList");
+  if(!state.presets)return;
+  list.innerHTML=state.presets.map((p,i)=>`
+    <button class="preset-btn ${p.active?"active":""}" onclick="loadPreset(${i})">
+      <div class="preset-color" style="background:rgb(${Math.round(p.color[0]*255)},${Math.round(p.color[1]*255)},${Math.round(p.color[2]*255)})"></div>
+      <span class="emoji">${p.emoji||"🎮"}</span>
+      <span class="pname">${p.name}</span>
+    </button>`).join("");
+}
+
+function loadPreset(i){
+  selPreset=i;
+  const p=state.presets[i];
+  document.getElementById("pName").value=p.name;
+  document.getElementById("fDetails").value=p.details;
+  document.getElementById("fState").value=p.state;
+  document.getElementById("fLargeImg").value=p.largeImageKey;
+  document.getElementById("fLargeText").value=p.largeImageText;
+  document.getElementById("fSmallImg").value=p.smallImageKey;
+  document.getElementById("fSmallText").value=p.smallImageText;
+  document.getElementById("fB1L").value=p.button1Label;
+  document.getElementById("fB1U").value=p.button1Url;
+  document.getElementById("fB2L").value=p.button2Label;
+  document.getElementById("fB2U").value=p.button2Url;
+  document.getElementById("fMusicMode").checked=p.musicMode;
+  document.getElementById("fJoinBtn").checked=p.useJoinButtons;
+  document.getElementById("cR").value=p.color[0];
+  document.getElementById("cG").value=p.color[1];
+  document.getElementById("cB").value=p.color[2];
+  updateColorPreview();updatePreview();dirty=false;
+}
+
+function markDirty(){dirty=true;updatePreview();}
+
+function updateColorPreview(){
+  const r=document.getElementById("cR").value;
+  const g=document.getElementById("cG").value;
+  const b=document.getElementById("cB").value;
+  document.getElementById("colorPreview").style.background=`rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
+}
+
+function getFormData(){
+  return{
+    name:document.getElementById("pName").value,
+    details:document.getElementById("fDetails").value,
+    state:document.getElementById("fState").value,
+    largeImageKey:document.getElementById("fLargeImg").value,
+    largeImageText:document.getElementById("fLargeText").value,
+    smallImageKey:document.getElementById("fSmallImg").value,
+    smallImageText:document.getElementById("fSmallText").value,
+    button1Label:document.getElementById("fB1L").value,
+    button1Url:document.getElementById("fB1U").value,
+    button2Label:document.getElementById("fB2L").value,
+    button2Url:document.getElementById("fB2U").value,
+    musicMode:document.getElementById("fMusicMode").checked,
+    useJoinButtons:document.getElementById("fJoinBtn").checked,
+    colorR:parseFloat(document.getElementById("cR").value),
+    colorG:parseFloat(document.getElementById("cG").value),
+    colorB:parseFloat(document.getElementById("cB").value),
+  };
+}
+
+async function applyNow(){
+  const d=getFormData();
+  await api("/api/update","POST",d);
+  toast("Applied!","#22c55e");
+}
+
+async function savePreset(){
+  if(selPreset<0){toast("Select a preset first","#f59e0b");return;}
+  const d={...getFormData(),index:selPreset};
+  await api("/api/preset/save","POST",d);
+  toast("Saved!","#22c55e");dirty=false;
+  await poll();
+}
+
+async function revertPreset(){
+  if(selPreset>=0)loadPreset(selPreset);
+}
+
+async function addPreset(){
+  const name=prompt("Preset name:","New Preset");
+  if(!name)return;
+  // Apply current config as new preset - we piggyback savePreset with index=presets.length via a workaround
+  toast("Coming soon - edit code to add presets","#f59e0b");
+}
+
+async function toggleConnect(){
+  if(state.connected){
+    await api("/api/disconnect","POST",{});
+    toast("Disconnected","#ef4444");
+  }else{
+    const cid=document.getElementById("cidInput")?document.getElementById("cidInput").value:state.clientId;
+    const id=prompt("Enter Discord Client ID:",state.clientId||"");
+    if(!id)return;
+    await api("/api/connect","POST",{clientId:id});
+    toast("Connecting...","#5865f2");
+  }
+}
+
+function switchTab(el,name){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".content").forEach(c=>c.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("tab-"+name).classList.add("active");
+  if(name==="preview")updatePreview();
+}
+
+function updatePreview(){
+  const li=document.getElementById("fLargeImg").value;
+  const si=document.getElementById("fSmallImg").value;
+  const det=document.getElementById("fDetails").value;
+  const st=document.getElementById("fState").value;
+  const pvL=document.getElementById("pvLarge");
+  const pvS=document.getElementById("pvSmall");
+  if(li&&li.startsWith("http"))pvL.src=li; else pvL.src="";
+  if(si&&si.startsWith("http"))pvS.src=si; else pvS.src="";
+  document.getElementById("pvDet").textContent=det||"Details...";
+  document.getElementById("pvSt").textContent=st||"State...";
+  const b1l=document.getElementById("fB1L").value;
+  const b1u=document.getElementById("fB1U").value;
+  const b2l=document.getElementById("fB2L").value;
+  const b2u=document.getElementById("fB2U").value;
+  const btns=document.getElementById("pvBtns");
+  btns.innerHTML="";
+  if(b1l&&b1u)btns.innerHTML+=`<div class="preview-btn-item">${b1l}</div>`;
+  if(b2l&&b2u)btns.innerHTML+=`<div class="preview-btn-item">${b2l}</div>`;
+}
+
+function updateLiveStatus(){
+  const el=document.getElementById("liveStatus");
+  if(!el||!state)return;
+  const rows=[
+    ["Status",state.connected?"🟢 Connected as "+state.username:"🔴 Disconnected"],
+    ["Details",state.details||"-"],
+    ["State",state.state||"-"],
+    ["Music",state.mediaPlaying?(state.mediaArtist+" - "+state.mediaTitle):"Not playing"],
+    ["Large Image",state.largeImageKey||"-"],
+  ];
+  el.innerHTML=rows.map(([k,v])=>`<div><span style="color:var(--muted);min-width:100px;display:inline-block">${k}:</span><span>${v}</span></div>`).join("");
+}
+
+// ── Image Search ──────────────────────────────────────────────
+async function searchImg(target){
+  const q=document.getElementById(target==="large"?"liSearch":"siSearch").value;
+  if(!q)return;
+  const container=document.getElementById(target==="large"?"liResults":"siResults");
+  container.innerHTML=`<div style="padding:10px;color:var(--muted)"><span class="spinner"></span> Searching...</div>`;
+  try{
+    const res=await api("/api/search/image?q="+encodeURIComponent(q));
+    renderImgGrid(container,res,target);
+  }catch(e){container.innerHTML="<div style=color:var(--red)>Error searching</div>";}
+}
+
+async function searchGif(target){
+  const q=document.getElementById(target==="large"?"liSearch":"siSearch").value;
+  if(!q)return;
+  const container=document.getElementById(target==="large"?"liResults":"siResults");
+  container.innerHTML=`<div style="padding:10px;color:var(--muted)"><span class="spinner"></span> Searching GIFs...</div>`;
+  try{
+    const res=await api("/api/search/gif?q="+encodeURIComponent(q));
+    renderImgGrid(container,res,target);
+  }catch(e){container.innerHTML="<div style=color:var(--red)>Error</div>";}
+}
+
+function renderImgGrid(container,items,target){
+  if(!items.length){container.innerHTML="<div style=color:var(--muted)>No results</div>";return;}
+  container.innerHTML=items.map((item,i)=>`
+    <div class="grid-img-item" onclick="selectImg('${target}','${item.url.replace(/'/g,"\\'")}',this)">
+      <img src="${item.thumb||item.url}" loading="lazy" alt="">
+    </div>`).join("");
+}
+
+function selectImg(target,url,el){
+  const container=el.closest(".grid-imgs");
+  container.querySelectorAll(".grid-img-item").forEach(e=>e.classList.remove("sel"));
+  el.classList.add("sel");
+  const field=target==="large"?"fLargeImg":"fSmallImg";
+  document.getElementById(field).value=url;
+  markDirty();
+}
+
+// ── Music Search ──────────────────────────────────────────────
+async function searchMusic(){
+  const q=document.getElementById("musicSearch").value;
+  if(!q)return;
+  const container=document.getElementById("musicResults");
+  container.innerHTML=`<div style="padding:10px;color:var(--muted)"><span class="spinner"></span> Searching iTunes...</div>`;
+  try{
+    const res=await api("/api/search/music?q="+encodeURIComponent(q));
+    if(!res.length){container.innerHTML="<div style=color:var(--muted)>No results</div>";return;}
+    container.innerHTML=res.map((item,i)=>`
+      <div class="music-item" onclick="selectMusic(${i},this)" data-i="${i}" data-thumb="${item.thumb}" data-title="${encodeURIComponent(item.title)}" data-artist="${encodeURIComponent(item.artist)}" data-url="${encodeURIComponent(item.trackUrl||"")}">
+        <img class="music-thumb" src="${item.thumb}" onerror="this.style.display='none'">
+        <div class="music-info">
+          <div class="mt">${item.title}</div>
+          <div class="ma">${item.artist} — ${item.album}</div>
+        </div>
+      </div>`).join("");
+    window._musicResults=res;
+  }catch(e){container.innerHTML="<div style=color:var(--red)>Error</div>";}
+}
+
+function selectMusic(i,el){document.querySelectorAll(".music-item").forEach(e=>e.classList.remove("sel"));el.classList.add("sel");const item=window._musicResults[i];document.getElementById("fDetails").value=item.title;document.getElementById("fState").value=item.artist;if(item.thumb)document.getElementById("fLargeImg").value=item.thumb;document.getElementById("fB1L").value="▶ YouTube Music";document.getElementById("fB1U").value=item.ytMusicUrl||"";document.getElementById("fB2L").value="🎵 Spotify";document.getElementById("fB2U").value=item.spotifyUrl||"";markDirty();toast("Filled from Deezer! YT Music & Spotify links set.","#5865f2");}
+
+function toast(msg,color){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.style.background=color||"#22c55e";
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+// Auto-load first preset and start polling
+poll().then(()=>{
+  if(state.presets&&state.presets.length>0){
+    const active=state.presets.findIndex(p=>p.active);
+    loadPreset(active>=0?active:0);
+  }
+});
+setInterval(poll,2000);
+</script></body></html>
+
